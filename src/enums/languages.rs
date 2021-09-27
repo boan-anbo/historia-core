@@ -1,0 +1,3 @@
+pub enum LANGUAGES {
+    CHINESE
+}
