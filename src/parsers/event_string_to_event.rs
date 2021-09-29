@@ -1,4 +1,4 @@
-use std::borrow::Borrow;
+
 use std::str::Chars;
 use regex::Regex;
 use crate::models::event::Event;
@@ -146,7 +146,7 @@ fn str_to_int(_input: &str, _opt: &HisotriaOptions) -> EventDate {
 
 
 fn normalize_number_string(_input: &str, _opt: &HisotriaOptions) -> String {
-    let mut anon_matcher: fn((usize, char), original: &usize) -> Vec<char>;
+    let anon_matcher: fn((usize, char), original: &usize) -> Vec<char>;
     match _opt.language {
         Languages::CHINESE => {
             anon_matcher = |(i, x), char_size| match x {
@@ -201,7 +201,7 @@ mod test_raw_string_to_event {
     use super::*;
 
     use test_case::test_case;
-    use crate::tests::default_options::{DEFAULT_CHINESE_OPT_CONNECTED, DEFAULT_CHINESE_OPT_SINGLE};
+    use crate::tests::default_options::{DEFAULT_CHINESE_OPT_SINGLE};
 
     #[test_case("中华人民共和国成立于49年10月1日,而不是50年", Some(49), Some(10), Some(1))]
     #[test_case("中华人民共和国成立于四九年十月一日,而不是五零年", Some(49), Some(10), Some(1))]

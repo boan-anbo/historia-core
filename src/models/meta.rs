@@ -33,13 +33,13 @@ impl Meta {
 
         let id_field = "id";
         let id = cx.string(self.id.to_string().as_str());
-        obj.set(cx, id_field, id);
+        obj.set(cx, id_field, id).err();
 
 
         let created_field = "created";
         // rfc3339 is Chrono's implementation of the standarized time.
         let created = cx.string(self.created.to_rfc3339());
-        obj.set(cx, created_field, created);
+        obj.set(cx, created_field, created).err();
 
 
         Ok(obj)

@@ -13,10 +13,10 @@ impl RawStrings {
         let obj = cx.empty_object();
 
         let raw_event_string = cx.string(&self.raw_event_string);
-        obj.set(cx, "rawEventString", raw_event_string);
+        obj.set(cx, "rawEventString", raw_event_string).err();
 
         let raw_context_string = cx.string(&self.raw_context_string);
-        obj.set(cx, "rawContextString", raw_context_string);
+        obj.set(cx, "rawContextString", raw_context_string).err();
 
         Ok(obj)
     }

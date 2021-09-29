@@ -1,6 +1,5 @@
-
+#![allow(dead_code)]
 mod tests;
-mod parser;
 pub mod models;
 mod consts;
 mod enums;

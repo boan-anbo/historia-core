@@ -63,18 +63,18 @@ pub fn find_previous_event_with_month<'a>(candidates: &Vec<Event>, current_event
 
 #[cfg(test)]
 mod test_link_years {
-    use std::time::Instant;
-    use neon::macro_internal::runtime::napi::reference::new;
+    
+    
     use super::*;
 
     use test_case::test_case;
     use crate::parsers::text_to_events::text_to_events;
-    use crate::tests::default_options::{DEFAULT_CHINESE_OPT_CONNECTED, DEFAULT_CHINESE_OPT_SINGLE};
-    use crate::tests::sample_long_text_chinese::LONG_ARTICLE;
+    use crate::tests::default_options::{DEFAULT_CHINESE_OPT_SINGLE};
+    
 
     #[test_case("一九九一年五月2日到十月八日", 1991)]
-    fn test_link_year(raw_text: &str, second_event_year: usize) {
-        let mut results = text_to_events(raw_text, &DEFAULT_CHINESE_OPT_SINGLE);
+    fn test_link_year(raw_text: &str, _second_event_year: usize) {
+        let results = text_to_events(raw_text, &DEFAULT_CHINESE_OPT_SINGLE);
         // first check
         assert_eq!(results.iter().count(), 2);
         let old_first = results.get(0).unwrap().clone();

@@ -1,4 +1,4 @@
-use std::ops::DerefMut;
+
 use crate::models::event::Event;
 use crate::models::parser_options::HisotriaOptions;
 use crate::parsers::text_to_events::text_to_events;
@@ -18,8 +18,8 @@ mod test_process {
     use crate::enums::sort::Sort;
     use crate::models::parser_options::HisotriaOptions;
     use crate::process::process;
-    use test_case::test_case;
-    use crate::tests::sample_long_text_chinese::LONG_ARTICLE;
+    
+    
     use crate::utils::write_file::write_to_file;
 
     // #[test_case( LONG_ARTICLE )]
@@ -34,7 +34,7 @@ mod test_process {
         let result = process(_input, &opt);
 
         assert!(!result.is_empty());
-        write_to_file(&result, "test.json");
+        write_to_file(&result, "test.json").err();
 
     }
 }

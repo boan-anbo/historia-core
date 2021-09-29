@@ -4,7 +4,7 @@ use neon::result::JsResult;
 use neon::types::{JsNull, JsObject};
 use serde::{Serialize, Deserialize};
 use uuid::Uuid;
-use chrono::{Date, DateTime, TimeZone, Utc};
+
 
 #[derive(Debug, Clone, Deserialize, Serialize, PartialOrd, PartialEq)]
 pub struct EventDate {
@@ -33,26 +33,26 @@ impl EventDate {
         let obj = cx.empty_object();
 
         let number_string_raw = cx.string(&self.number_string_raw);
-        obj.set(cx, "numberStringRaw", number_string_raw);
+        obj.set(cx, "numberStringRaw", number_string_raw).err();
 
         let number_string_arabic = cx.string(&self.number_string_arabic);
-        obj.set(cx, "numberStringArabic", number_string_arabic);
+        obj.set(cx, "numberStringArabic", number_string_arabic).err();
 
         let number = cx.number(self.number as f64);
-        obj.set(cx, "number", number);
+        obj.set(cx, "number", number).err();
 
 
         let is_inferred = cx.boolean(self.is_inferred);
-        obj.set(cx, "isInferred", is_inferred);
+        obj.set(cx, "isInferred", is_inferred).err();
 
 
         let inferred_from_field = "inferredFrom";
         if let Some(inferred_from) = &self.inferred_from {
             let value = cx.string(inferred_from.to_string());
-            obj.set(cx, inferred_from_field, value);
+            obj.set(cx, inferred_from_field, value).err();
         } else {
             let null = JsNull::new(cx);
-            obj.set(cx, inferred_from_field, null);
+            obj.set(cx, inferred_from_field, null).err();
         }
 
         Ok(obj)

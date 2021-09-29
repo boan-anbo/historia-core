@@ -1,6 +1,7 @@
-use std::fs::{File, OpenOptions};
+use std::fs::{File};
 use std::io::Write;
 use serde::{Deserialize, Serialize};
+
 
 pub fn write_to_file<T>(data: &T, path: &str) -> std::io::Result<()>
     where for<'a> T: Serialize + Deserialize<'a>
