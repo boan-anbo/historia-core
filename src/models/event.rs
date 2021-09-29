@@ -1,7 +1,7 @@
-use std::ptr::null;
-use chrono::{Date, NaiveDate, TimeZone, Utc};
-use neon::context::{Context, FunctionContext};
-use neon::macro_internal::runtime::napi::primitive::boolean;
+
+use chrono::{NaiveDate, TimeZone, Utc};
+use neon::context::{Context};
+
 use neon::object::Object;
 use neon::result::JsResult;
 use neon::types::{JsNull, JsObject};
@@ -91,68 +91,68 @@ impl Event {
         let obj = cx.empty_object();
 
         let raw_strings = self.raw_strings.to_neon_object(cx).unwrap();
-        obj.set(cx, "rawStrings", raw_strings);
+        obj.set(cx, "rawStrings", raw_strings).err();
 
 
         let meta = self.meta.to_neon_object(cx).unwrap();
-        obj.set(cx, "meta", meta);
+        obj.set(cx, "meta", meta).err();
 
 
         let start_month_field = "startYear";
         if let Some(start_year) = &self.start_year {
             let start_year_value = start_year.to_neon_object(cx).unwrap();
-            obj.set(cx, start_month_field, start_year_value);
+            obj.set(cx, start_month_field, start_year_value).err();
         } else {
             let null = JsNull::new(cx);
-            obj.set(cx, start_month_field, null);
+            obj.set(cx, start_month_field, null).err();
         }
 
 
         let start_month_field = "startMonth";
         if let Some(start_month) = &self.start_month {
             let value = start_month.to_neon_object(cx).unwrap();
-            obj.set(cx, start_month_field, value);
+            obj.set(cx, start_month_field, value).err();
         } else {
             let null = JsNull::new(cx);
-            obj.set(cx, start_month_field, null);
+            obj.set(cx, start_month_field, null).err();
         }
 
 
         let start_day_field = "startDay";
         if let Some(start_day) = &self.start_day {
             let value = start_day.to_neon_object(cx).unwrap();
-            obj.set(cx, start_day_field, value);
+            obj.set(cx, start_day_field, value).err();
         } else {
             let null = JsNull::new(cx);
-            obj.set(cx, start_day_field, null);
+            obj.set(cx, start_day_field, null).err();
         }
 
         let is_start_decade_field = "isStartDecade";
         if let Some(is_start_decade) = &self.is_start_decade {
             let value = cx.boolean(*is_start_decade);
-            obj.set(cx, is_start_decade_field, value);
+            obj.set(cx, is_start_decade_field, value).err();
         } else {
             let null = JsNull::new(cx);
-            obj.set(cx, is_start_decade_field, null);
+            obj.set(cx, is_start_decade_field, null).err();
         }
 
         let is_start_century_field = "isStartCentury";
         if let Some(is_start_century) = &self.is_start_century {
             let value = cx.boolean(*is_start_century);
-            obj.set(cx, is_start_century_field, value);
+            obj.set(cx, is_start_century_field, value).err();
         } else {
             let null = JsNull::new(cx);
-            obj.set(cx, is_start_century_field, null);
+            obj.set(cx, is_start_century_field, null).err();
         }
 
 
         let start_date_field = "startDate";
         if let Some(start_date) = &self.start_date {
             let value = cx.string(start_date.to_string());
-            obj.set(cx, start_date_field, value);
+            obj.set(cx, start_date_field, value).err();
         } else {
             let null = JsNull::new(cx);
-            obj.set(cx, start_date_field, null);
+            obj.set(cx, start_date_field, null).err();
         }
 
 
@@ -163,7 +163,7 @@ impl Event {
 
 #[cfg(test)]
 mod test_event {
-    use std::ops::DerefMut;
+    
     use chrono::Datelike;
     use crate::parsers::text_to_events::text_to_events;
     use crate::tests::default_options::DEFAULT_CHINESE_OPT_SINGLE;

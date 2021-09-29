@@ -22,12 +22,12 @@ pub(crate) fn text_to_events(_input: &str, _opt: &HisotriaOptions) -> Vec<Event>
 mod test_text_to_events {
 
 
-    use std::time::Instant;
+    
     use super::*;
 
     use test_case::test_case;
-    use crate::tests::default_options::{DEFAULT_CHINESE_OPT_CONNECTED, DEFAULT_CHINESE_OPT_SINGLE};
-    use crate::tests::sample_long_text_chinese::LONG_ARTICLE;
+    use crate::tests::default_options::{DEFAULT_CHINESE_OPT_SINGLE};
+    
 
     #[test_case(
     r#"大貓熊（學名：Ailuropoda melanoleuca），也稱作大熊貓，一般稱為「貓熊」或「熊貓」，屬於食肉目熊科的一種哺乳動物，體色為黑白兩色。貓熊是中國特有物種，現存的主要棲息地是中國中西部四川盆地周邊的山區和陝西南部的秦嶺地區。全世界野生大貓熊現存大約有2060頭（2016年數據[2]）。2016年末，世界自然保護聯盟（IUCN）將大貓熊的受威脅等級從「瀕危級」降為「易危級」。[3]由於生育率低，大貓熊在中國瀕危動物紅皮書等級中評為瀕危物種，為中國大陸國寶。大貓熊被譽為生物界的活化石[4]。

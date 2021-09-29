@@ -2,7 +2,7 @@ use regex::{Match, Regex};
 use crate::enums::languages::{Languages, MatchMode};
 use crate::models::parser_options::HisotriaOptions;
 use crate::consts::regex::{CHINESE_REGEX_RAW_STRING_SINGLE, CHINESE_REGEX_RAW_STRING_CONNECTED, CHINESE_REGEX_ESSENTIAL_MARKERS};
-use crate::models::event::Event;
+
 use crate::models::raw_string::RawStrings;
 
 pub(crate) fn text_to_raw_event_strings(_input: &str, _opt: &HisotriaOptions) -> Vec<RawStrings> {
@@ -39,7 +39,7 @@ fn get_context_string(_passage: &str, m: Match, _opt: &HisotriaOptions) -> Strin
     let passage_char_length = _passage.chars().count();
 
     let char_start = byte_to_char_index(_passage, m.start().clone());
-    let mut left_margin = char_start.checked_sub(_opt.left_context_margin).unwrap_or(0);
+    let left_margin = char_start.checked_sub(_opt.left_context_margin).unwrap_or(0);
 
     let char_end = byte_to_char_index(_passage, m.end().clone());
     let mut right_margin = char_end + _opt.right_context_margin;
