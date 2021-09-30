@@ -1,6 +1,7 @@
 use crate::enums::languages::{Languages, MatchMode};
 use crate::enums::sort::Sort;
 
+#[derive(Deserialize, Serialize, Debug)]
 pub struct HisotriaOptions {
     pub language: Languages,
     pub match_mode: MatchMode,
