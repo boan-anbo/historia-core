@@ -5,13 +5,15 @@ use neon::types::{JsNull, JsObject};
 use serde::{Serialize, Deserialize};
 use uuid::Uuid;
 
+use ts_rs::TS;
 
-#[derive(Debug, Clone, Deserialize, Serialize, PartialOrd, PartialEq)]
+#[derive(Debug, Clone, Deserialize, Serialize, PartialOrd, PartialEq, TS)]
 pub struct EventDate {
     pub(crate) number_string_raw: String,
     pub(crate) number_string_arabic: String,
     pub(crate) number: isize,
     pub is_inferred: bool,
+    #[ts(type = "string")]
     pub inferred_from: Option<Uuid>
 }
 

@@ -1,4 +1,4 @@
-
+use std::fs;
 use crate::models::event::Event;
 use crate::models::parser_options::HisotriaOptions;
 use crate::parsers::text_to_events::text_to_events;
@@ -8,9 +8,15 @@ pub fn process(_input_text: &str, _opt: &HisotriaOptions) -> Vec<Event> {
     let events = text_to_events(_input_text, _opt);
 
     let events_after_post_process = post_process(events, _opt);
-
     events_after_post_process
 }
+
+pub fn process_file(file_path: &str, _opt: &HisotriaOptions) -> Vec<Event> {
+    let contents = fs::read_to_string(file_path)
+        .expect("Something went wrong reading the file");
+    process(&contents, _opt)
+}
+
 
 #[cfg(test)]
 mod test_process {

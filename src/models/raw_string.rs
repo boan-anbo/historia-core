@@ -2,8 +2,9 @@ use neon::context::Context;
 use neon::object::Object;
 use neon::prelude::JsResult;
 use neon::types::JsObject;
+use ts_rs::TS;
 use serde::{Serialize, Deserialize};
-#[derive(Default, Clone, Debug, Deserialize, Serialize)]
+#[derive(Default, Clone, Debug, Deserialize, Serialize, TS)]
 pub struct RawStrings {
     pub raw_event_string: String,
     pub raw_context_string: String
