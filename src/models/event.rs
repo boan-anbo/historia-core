@@ -1,6 +1,6 @@
-
 use chrono::{NaiveDate, TimeZone, Utc};
 use neon::context::{Context};
+use ts_rs::{TS, export};
 
 use neon::object::Object;
 use neon::result::JsResult;
@@ -11,7 +11,7 @@ use uuid::Uuid;
 use crate::models::meta::Meta;
 use crate::models::raw_string::RawStrings;
 
-#[derive(Debug, Clone, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize, TS)]
 pub struct Event {
     pub meta: Meta,
     pub raw_strings: RawStrings,
@@ -40,13 +40,13 @@ impl Default for Event {
 
 // date utility
 impl Event {
-    pub fn build_date(& mut self) {
+    pub fn build_date(&mut self) {
         if self.start_year.is_some() && self.start_month.is_some() && self.start_day.is_some() {
             self.start_date = Some(
                 Utc.ymd(
-                self.start_year.as_ref().unwrap().number as i32,
-                self.start_month.as_ref().unwrap().number.clone() as u32,
-                self.start_day.as_ref().unwrap().number.clone() as u32
+                    self.start_year.as_ref().unwrap().number as i32,
+                    self.start_month.as_ref().unwrap().number.clone() as u32,
+                    self.start_day.as_ref().unwrap().number.clone() as u32,
                 ).naive_utc()
             )
         };
@@ -160,13 +160,24 @@ impl Event {
     }
 }
 
+export! {
+            // Event => "./ts_models/event.ts",
+            // RawStrings => "./ts_models/rawstrings.ts",
+            // EventDate => "./ts_models/eventdate.ts",
+            // Meta => "./ts_models/meta.ts",
+    Event, RawStrings, EventDate, Meta => "./ts_models/event.ts"
+        }
 
 #[cfg(test)]
 mod test_event {
-    
     use chrono::Datelike;
     use crate::parsers::text_to_events::text_to_events;
     use crate::tests::default_options::DEFAULT_CHINESE_OPT_SINGLE;
+    use crate::models::event::Event;
+    use ts_rs::export;
+
+    #[test]
+    fn generate_event_typescript_definitions() {}
 
     #[test]
     fn test_event_start_date() {
@@ -179,6 +190,5 @@ mod test_event {
         assert_eq!(*&result.first().unwrap().start_date.unwrap().month(), 6);
         assert_eq!(*&result.first().unwrap().start_date.unwrap().day(), 1);
         // assert_eq!(*&first.start_date.unwrap().year(), 1957);
-
     }
 }

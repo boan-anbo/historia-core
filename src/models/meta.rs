@@ -5,10 +5,13 @@ use neon::result::JsResult;
 use neon::types::JsObject;
 use uuid::Uuid;
 use serde::{Serialize, Deserialize};
+use ts_rs::{TS};
 
-#[derive(Debug, Clone, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize, TS)]
 pub struct Meta {
+    #[ts(type = "string")]
     id: Uuid,
+    #[ts(type = "string")]
     created: DateTime<Utc>
 }
 
