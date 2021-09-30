@@ -1,5 +1,5 @@
 [package]
-name = "event-parser-neon"
+name = "historia-core"
 version = "0.1.0"
 license = "ISC"
 edition = "2018"
